@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TileStache</title>
+    <link rel="stylesheet" href="http://leafletjs.com/dist/leaflet.css" />
+    <style>
+      body { padding: 0; margin: 0; }
+      html, body, #map { height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="http://leafletjs.com/dist/leaflet.js"></script>
+    <script src="http://danzel.github.io/Leaflet.utfgrid/src/leaflet.utfgrid.js"></script>
+    <script>
+    var map = L.map('map').setView([0, 0], 2);
+    L.tileLayer('http://127.0.0.1:8080/world_proxy/{z}/{x}/{y}.png', {maxZoom: 22}).addTo(map);
+    L.tileLayer('http://127.0.0.1:8080/world_png/{z}/{x}/{y}.png', {maxZoom: 22}).addTo(map);
+    var utfGrid = new L.UtfGrid('http://127.0.0.1:8080/world_utfgrid/{z}/{x}/{y}.json', {useJsonP: false});
+    map.addLayer(utfGrid);
+    utfGrid.on('click', function (e) {
+      if (e.data) {
+        L.popup().setLatLng(e.latlng).setContent(
+          '<b>' + e.data.NAME + '</b><br> <b>Pop:</b> ' + e.data.POP2005
+        ).openOn(map);
+      }
+    }); 
+    </script>
+  </body>
+</html>

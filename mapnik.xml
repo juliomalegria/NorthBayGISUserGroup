@@ -1,0 +1,16 @@
+<Map srs="+init=epsg:3857">
+  <Style name="The Style">
+    <Rule>
+      <LineSymbolizer stroke="#006363" stroke-width="1" />
+      <PolygonSymbolizer fill-opacity="0.3" fill="#33cccc" />
+    </Rule>
+  </Style>
+  <Layer name="The Layer"
+	 srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>The Style</StyleName>
+    <Datasource>
+      <Parameter name="type">shape</Parameter>
+      <Parameter name="file">world_borders/world_borders.shp</Parameter>
+    </Datasource>
+  </Layer>
+</Map>
